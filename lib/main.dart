@@ -16,3 +16,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// bodyLarge: TextStyle(fontFamily: 'Red Hat Display'),bodyMedium: TextStyle(fontFamily: 'Red Hat Display')
