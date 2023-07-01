@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../widgets/task_list.dart';
 import 'package:todo/screens/add_task_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/models/task_data.dart';
 
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,11 +16,16 @@ class TasksScreen extends StatelessWidget {
               context: context,
               isScrollControlled: true,
               builder: (context) => SingleChildScrollView(
-              child:Container(
-                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen(),
-              )
-          ));
+                      child: Container(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: AddTaskScreen((newTaskTitle) {
+                      // setState(() {
+                      //   tasks.add(Task(name: newTaskTitle));
+                      // });
+                      Navigator.pop(context);
+                    }),
+                  )));
         },
         child: Icon(Icons.add),
       ),
@@ -50,7 +55,7 @@ class TasksScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ],
@@ -66,6 +71,7 @@ class TasksScreen extends StatelessWidget {
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0),
                   )),
+              // child: TasksList(tasks),
               child: TasksList(),
             ),
           )
